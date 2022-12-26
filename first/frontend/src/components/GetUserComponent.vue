@@ -6,6 +6,16 @@
       <button class="button button--social-login button--github" @click="logOut"><font-awesome-icon class="icon" icon="fa-brands fa-github" />Logout</button>
       <p>유저 코드 : {{ userCode }}</p>
       <p>Token : {{ accessToken }}</p>
+      <button @click="getCommitList">커밋 리스트 가져오기</button>
+      <div
+      v-for="commit in commitList"
+      :key="commit.sha"
+      >
+      <!-- {{ commit.commit }} -->
+      <p>작성자 : {{ commit.commit.author.name }}</p>
+      <p>내용 : {{ commit.commit.message }}</p>
+      <hr/>
+      </div>
     </div>
     <div v-else>
       <button class="button button--social-login button--github" @click="getGithubPermissonCode"><font-awesome-icon class="icon" icon="fa-brands fa-github" />Login With Github</button>
@@ -22,6 +32,7 @@ export default {
   name: 'GetUserComponent',
   data() {
     return {
+      commitList: []
     }
   },
   computed: {
@@ -68,6 +79,15 @@ export default {
     logOut() {
       this.$store.dispatch('setPermissonCode', '')
       this.$store.dispatch('setAccessToken', '')
+    },
+    getCommitList() {
+      const URL = "https://api.github.com/repos/yts0275/GitAPI/commits"
+      axios.get(URL).then((res) => {
+        console.log(res)
+        this.commitList = res.data
+      }).catch((err) => {
+        console.log(`err = ${err}`)
+      })
     }
   }
 }

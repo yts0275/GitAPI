@@ -2,9 +2,12 @@
   <div id="app">
     <nav>
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link :to="{ name: 'gistList', query: {page: 1} }">Gist</router-link> |
+      <router-link :to="{ name: 'gistCreate' }">Gist 글쓰기</router-link>
     </nav>
-    <router-view/>
+    <div class="container">
+      <router-view :key="$route.fullPath"/>
+    </div>
   </div>
 </template>
 
@@ -13,7 +16,7 @@
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  /* text-align: center; */
   color: #2c3e50;
 }
 

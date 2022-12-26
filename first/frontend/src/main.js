@@ -18,6 +18,12 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import store from './store'
 
+import BootstrapVue from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+Vue.use(BootstrapVue)
+
 /* 위에서 import한 아이콘들을 Core library에 등록 */
 library.add(fas, far, fab)
 
